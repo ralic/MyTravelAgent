@@ -1,3 +1,6 @@
+# This module implements the calculation of the semantic similarity 
+# between two words
+
 from nltk.corpus import wordnet as wn
 
 import nltk
@@ -55,7 +58,8 @@ def semSim(word1, word2):
 
 if  __name__ == "__main__":
     print semSim("happy", "excited")
-    #synsets1 = wn.synsets("water")
+    print semSim("policman", "fireman")
+    print semSim("tree", "flower")
     #synsets2 = wn.synsets("ice")
     #print getShortestPath(synsets1, synsets2)
     #print synsets1[0].hypernym_paths()[3]
