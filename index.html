@@ -9,7 +9,6 @@ body  {
     background-image: url("img/bg1.jpg");
     background-repeat: no-repeat;
     margin: 0;
-
 }
 
 h1.title {
@@ -53,6 +52,7 @@ input[type=search] {
   border: solid 2px #ccc;
   padding: 15px 10px 15px 35px;
   width: 400px;
+  opacity: 0.9;
   
   -webkit-border-radius: 10em;
   -moz-border-radius: 10em;
@@ -116,27 +116,30 @@ input::-webkit-input-placeholder {
     document.getElementById('userInput').value = '';
     websocket = new WebSocket(wsUri);
     websocket.onopen = function() {
-      websocket.send("testwebsocket");
+      websocket.send(inputString);
     };
     websocket.onmessage = function(evt) {
       var message = evt.data;
-      //window.alert(message);
+//      window.alert(message);
 
 
-//      var messageParse = evt.data.split(" ", 2);
-//      var latitude = parseFloat(messageParse[0]);
-//      var longitude = parseFloat(messageParse[1]);
-
+      var messageParse = evt.data.split(" ", 2);
+      var latitude = parseFloat(messageParse[0]);
+      var longitude = parseFloat(messageParse[1]);
+      var latlng = new google.maps.LatLng(parseFloat(messageParse[0]), parseFloat(messageParse[1]));
+      
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(40.8069062, -73.9653714),
-//        position: new google.maps.LatLng(parseFloat(messageParse[0]), parseFloat(messageParse[1])),
+//        position: new google.maps.LatLng(40.8069062, -73.9653714),
+        position: latlng,
         title:"Result point"
       });
 
-      map.setCenter(new google.maps.LatLng(30.8069062, -73.9653714));
+      map.setZoom(15);
+      map.setCenter(latlng);
 
       marker.setMap(map);
       google.maps.event.trigger(map, 'resize');
+
       websocket.close();
 
     };
@@ -151,7 +154,7 @@ input::-webkit-input-placeholder {
 </script>
 
 <script>
-  var wsUri = "ws://localhost:8000/"
+  var wsUri = "ws://192.168.1.145:8000/"
 </script>
 
   </head>
