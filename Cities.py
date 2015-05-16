@@ -15,11 +15,12 @@ def init():
 			if line == "":
 				continue
 			if line[0] != "#":
-				elements = line.split()
-				latitude = float(elements[1])
-				longitude = float(elements[2])
-				city = elements[4]
-				state = elements[6]
+				elements = line.split("\t")
+				latitude = float(elements[1].strip())
+				longitude = float(elements[2].strip())
+				tmp = elements[-1].split("#")
+				city = tmp[0].strip()
+				state = tmp[1].strip()
 				cityDict = {'city': city, 'latitude': latitude, 'longitude': longitude, 'state': state}
 				__MAJOR_CITIES__.append(cityDict)
 	for i in range(0, len(__MAJOR_CITIES__)):
