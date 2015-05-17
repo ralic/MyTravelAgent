@@ -33,6 +33,72 @@ div.search {
     margin-top: 110px;
 }
 
+.wall-container {
+    z-index: 2;
+    position: fixed;
+    background-image: url("img/bg2.jpg");
+
+}
+
+.wall-container ul {
+  list-style-type: none;
+}
+ 
+.wall-container li {
+  float: left;
+  position: relative;
+  width: 280px;
+  height: 187px;
+  overflow: hidden;
+}
+ 
+.wall-container li:hover {
+  cursor: pointer;
+}
+
+.wall-container li p {
+  color: transparent;
+  background: transparent;
+  font: 200 30px/187px 'Arvo', Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+   
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 187px; 
+ 
+ 
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+ 
+.wall-container li:hover p {
+  color: white;
+  background: #000; /*fallback for old browsers*/
+  background: rgba(0,0,0,0.7);
+}
+
+.wall-container img {
+  width: 280px;
+  height: 187px;
+   
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+ 
+.wall-container li:hover img {
+  width: 320px;
+  height: 213px;
+}
+
 .splash-container {
     z-index: 1;
     overflow: hidden;
@@ -48,7 +114,7 @@ div.search {
     top: 87%;
     width: 100%;
     min-height: 12%;
-    z-index: 2;
+    z-index: 3;
     background: white;
 }
 
@@ -116,6 +182,7 @@ input::-webkit-input-placeholder {
 <script>
 
   var map;
+  var wsUri = "ws://192.168.1.145:8000/"
 
   function initialize() {
     var mapCanvas = document.getElementById('map-canvas');
@@ -143,7 +210,7 @@ input::-webkit-input-placeholder {
       var message = evt.data;
 //      window.alert(message);
 
-      document.body.style.backgroundImage = "url('img/bg2.jpg')";
+//      document.body.style.backgroundImage = "url('img/bg2.jpg')";
 
 
       var messageParse = evt.data.split("\t");
@@ -173,7 +240,8 @@ input::-webkit-input-placeholder {
 //      window.alert(document.getElementById("userInput").style.width);
       document.getElementById("userInput").style.width="400px";
       document.getElementById("userInput").placeholder="Say something here and we will find you a place to go";
-//      document.getElementById("inputBox").style.display="none";
+      document.getElementById("wall").style.display="";
+//      window.alert(document.getElementById("wall").style.display);
 
       websocket.close();
 
@@ -188,13 +256,11 @@ input::-webkit-input-placeholder {
   }
 </script>
 
-<script>
-  var wsUri = "ws://192.168.1.145:8000/"
-</script>
 
   </head>
 
   <body>
+
     <div class="splash-container">
       <h1 class="title">MyTravelAgent</h1>
       <h1 class="subtitle">Some words very zhuangbi here.</h1>
