@@ -115,8 +115,13 @@ class Client(WebSocket):
          point = locationDict['location'].point
          lat, lng = point.latitude, point.longitude
          ll = str(lat) + ',' + str(lng)
-         txt = fs.searchLL(lat, lng).name
-         imageUrl = locationDict['images'][0]['standard_resolution'].url
+         searchLLResult, searchUrl = fs.searchLL(lat, lng)
+         txt = searchLLResult.name
+         #imageUrl = locationDict['images'][0]['standard_resolution'].url
+         if searchUrl == "":
+            imageUrl = locationDict['images'][0]['standard_resolution'].url
+         else:
+            imageUrl = searchUrl
          stringList.append(TRI.join([ll, txt, imageUrl]))      
       toSend = STAR.join(['H2'] + stringList)
       print toSend

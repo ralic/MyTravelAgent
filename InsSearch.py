@@ -35,7 +35,7 @@ def searchCity(city):
     if tmp == -1:
         return -1
     lat, lng = tmp
-    mediaList = ins.media_search(count=100, lat=lat, lng=lng, q=2000, min_timestamp=1431216000, max_timestamp=1431737117)
+    mediaList = ins.media_search(count=100, lat=lat, lng=lng, q=2000)#, min_timestamp=1431216000, max_timestamp=1431737117)
     print "Media Searched: " + str(len(mediaList))
     for media in mediaList:
         #print repr(dir(media))
