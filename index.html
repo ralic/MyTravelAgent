@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <title>Advanced Big Data Analytics Final Project</title>
     <style>
 
@@ -26,6 +25,15 @@ h1.subtitle {
     color: white;
     text-align:center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+a.home {
+    color: white;
+    font-style: bold;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 20px;
 }
 
 div.search {
@@ -133,7 +141,8 @@ div.search {
 input {
   outline: none;
 }
-input[type=search] {
+
+input.city {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
@@ -145,7 +154,7 @@ input::-webkit-search-cancel-button {
 }
 
 
-input[type=search] {
+input.city {
   width: 190px;
   border: solid 2px #ccc;
   padding: 15px 10px 15px 35px;
@@ -160,7 +169,7 @@ input[type=search] {
   transition: all .5s;
 }
 
-input[type=search]:focus {
+input.city:focus {
 
   width: 400px;
   background-color: #fff;
@@ -171,6 +180,43 @@ input[type=search]:focus {
   box-shadow: 0 0 5px rgba(109,207,246,.5);
 }
 
+input.sentence {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 90%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+  display: none; 
+}
+
+
+input.sentence {
+  width: 400px;
+  border: solid 2px #ccc;
+  padding: 15px 10px 15px 35px;
+  opacity: 0.9;
+  
+  -webkit-border-radius: 10em;
+  -moz-border-radius: 10em;
+  border-radius: 13px;
+  
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+}
+
+input.sentence:focus {
+
+  width: 400px;
+  background-color: #fff;
+  border-color: #66CC75;
+  
+  -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
 
 input:-moz-placeholder {
   color: #999;
@@ -322,6 +368,12 @@ window.alert(location3[1]);
     websocket.send('H2' + '^ ^ ^' + inputSentence);
   }
 
+  function reset() {
+    websocket.close();
+    document.getElementById("wall").style.display="none";
+    websocket = new WebSocket(wsUri);
+  }
+
 </script>
 
 
@@ -361,16 +413,16 @@ window.alert(location3[1]);
       <h1 class="subtitle">Some words very zhuangbi here.</h1>
       <div class="search" id="cityInputBox">
         <form onsubmit="citySearch(); return false;">
-          <input type="search" id="cityInput" placeholder="Which city are you going?">
+          <input class="city" id="cityInput" placeholder="Which city are you going?">
         </form>
       </div>
     </div>
     <div class="content-wrapper">
       <div style="background: #2E8B57;">
-        <a href="">Home</a>
-        <div class="search" id="mainInputBox" style="visibility: hidden; display: inline-block;">
+        <a onclick="reset()" class="home">Home</a>
+        <div class="search" id="mainInputBox" style="margin-left: 300px; visibility: ; display: inline-block;">
           <form onsubmit="mainSearch(); return false;">
-            <input type="search" id="mainInput" placeholder="Say something here and we will find you a place to go">
+            <input class="sentence" id="mainInput" placeholder="Say something here and we will find you a place to go">
           </form>
         </div>
       </div>
