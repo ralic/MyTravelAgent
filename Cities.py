@@ -21,7 +21,7 @@ def init():
 				tmp = elements[-1].split("#")
 				city = tmp[0].strip()
 				state = tmp[1].strip()
-				cityDict = {'city': city, 'latitude': latitude, 'longitude': longitude, 'state': state}
+				cityDict = {'city': city.lower(), 'latitude': latitude, 'longitude': longitude, 'state': state}
 				__MAJOR_CITIES__.append(cityDict)
 	for i in range(0, len(__MAJOR_CITIES__)):
 		city = __MAJOR_CITIES__[i]['city']
@@ -30,6 +30,7 @@ def init():
 
 
 def findLocation(city):
+	city = city.lower()
 	try:
 		index = __CITY_INDEX__[city]
 	except:

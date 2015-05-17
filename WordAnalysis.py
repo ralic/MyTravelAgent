@@ -2,8 +2,9 @@
 # between two words
 
 from nltk.corpus import wordnet as wn
-
 import nltk
+
+SIMILARITY_THRESHOLD = 0.5
 
 def findIntersection(list1, list2):
     common = None
@@ -46,14 +47,35 @@ def getShortestPath(synsets1, synsets2):
     return minShortest
 
 def semSim(word1, word2):
-    synsets1 = wn.synsets(word1)
-    synsets2 = wn.synsets(word2)
+    synsets1 = wn.synsets(word1.lower())
+    synsets2 = wn.synsets(word2.lower())
     if (len(synsets1) == 0) or (len(synsets2) == 0):
         return -1
     lso, lsoDepth = getLso(synsets1, synsets2)
     minLen = getShortestPath(synsets1, synsets2)
     sim = float(2 * lsoDepth) / float(minLen + 2 * lsoDepth)
     return sim
+
+def getSetsSim(refSet, targetSet):
+    if len(refSet) == 0:
+        return 0.0
+    hitRatioSum = 0
+    for targetWord in targetSet:
+        targetWord = targetWord.lower()
+        targetWord = targetWord.strip("#")
+        hit = 0
+        for refWord in refSet:
+            refWord = refWord.strip("#")
+            refWord = refWord.lower()
+            if (refWord == targetWord) or (refWord in targetWord) or (targetWord in refWord):
+                hit += 2
+            else:
+                if semSim(refWord, targetWord) > SIMILARITY_THRESHOLD:
+                    hit += 1
+        hitRatio = float(hit) / float(len(refSet))
+        hitRatioSum += hitRatio
+    simScore = hitRatioSum / len(targetSet)
+    return simScore
 
 
 if  __name__ == "__main__":
