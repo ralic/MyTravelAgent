@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <title>Advanced Big Data Analytics Final Project</title>
     <style>
 
@@ -29,27 +30,34 @@ h1.subtitle {
 
 div.search {
     text-align: center;
-    margin: 50px;
-    margin-top: 110px;
+
+
+/*    margin: 50px;*/
+/*    margin-top: 110px;*/
 }
 
 .wall-container {
+    background: white;
     z-index: 2;
     position: fixed;
-    background-image: url("img/bg2.jpg");
-
+    width: 1500px;
 }
 
 .wall-container ul {
   list-style-type: none;
+  margin: 0px;
+  position: absolute;
+  left: -40px;
+  width: 1200px;
 }
  
 .wall-container li {
   float: left;
   position: relative;
-  width: 280px;
-  height: 187px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
+  margin: 0px;
 }
  
 .wall-container li:hover {
@@ -57,17 +65,18 @@ div.search {
 }
 
 .wall-container li p {
+  margin: 0px;
   color: transparent;
   background: transparent;
-  font: 200 30px/187px 'Arvo', Helvetica, Arial, sans-serif;
+  font: 200 30px/187px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   text-align: center;
   text-transform: uppercase;
    
   position: absolute;
   top: 0;
   left: 0;
-  width: 280px;
-  height: 187px; 
+  width: 200px;
+  height: 200px; 
  
  
   -webkit-transition: all 1s ease;
@@ -81,11 +90,14 @@ div.search {
   color: white;
   background: #000; /*fallback for old browsers*/
   background: rgba(0,0,0,0.7);
+  z-index: 1;
 }
 
 .wall-container img {
-  width: 280px;
-  height: 187px;
+  width: 200px;
+  height: 200px;
+  border-style: solid;
+  border-width: 5px;
    
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -95,8 +107,7 @@ div.search {
 }
  
 .wall-container li:hover img {
-  width: 320px;
-  height: 213px;
+  -webkit-filter: blur(5px);
 }
 
 .splash-container {
@@ -181,8 +192,110 @@ input::-webkit-input-placeholder {
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
 
+// window.alert("test");
+
   var map;
-  var wsUri = "ws://192.168.1.145:8000/"
+
+  var imgUrl = [];
+  var tagList = [];
+  var wallLat = [];
+  var wallLng = [];
+  // for (var i = 0; i < 24; i++) {
+  //   imgUrl[i] = '';
+  //   tagList[i] = '';
+  // }
+
+  var wsUri = "ws://209.2.216.243:8000/";
+  websocket = new WebSocket(wsUri);
+  websocket.onopen = function() {
+  };
+  websocket.onerror = function(evt) {
+  };
+  websocket.onclose = function(evt) {
+  };
+  websocket.onmessage = function(evt) {
+    var message = evt.data;
+
+//      document.body.style.backgroundImage = "url('img/bg2.jpg')";
+
+    var messageParse = message.split("^ ^ ^");
+//    window.alert(messageParse.length);
+
+    if (messageParse[0] == 'H1') {
+      if (messageParse[1] == '-1') {
+        window.alert("No such city.");
+      } else if (messageParse[1] == '0') {
+        var mapGoTo = messageParse[2].split(",");
+        var mapGoToLatLng = new google.maps.LatLng(parseFloat(mapGoTo[0]), parseFloat(mapGoTo[1]));
+
+        map.setZoom(15);
+        map.setCenter(mapGoToLatLng);
+
+//window.alert(document.getElementById("wallTag3").value);
+
+        for (var i = 0; i < 24; i++) {
+          var wall = messageParse[i + 3].split("$ $ $");
+
+          wallLat[i] = wall[0].split(",")[0];
+          wallLng[i] = wall[0].split(",")[1];
+// window.alert("here");
+          document.getElementById("wallTag" + i).innerHTML = wall[1];
+          document.getElementById("wallImg" + i).src = wall[2];
+        }
+// window.alert("here");
+// window.alert(document.getElementById("wall").style.display);
+// window.alert("here");
+// window.alert(document.getElementById("mainInputBox").style.display);
+        document.getElementById("wall").style.display="";
+        document.getElementById('mainInputBox').style.visibility= "";
+      } else {
+        websocket.close();
+      }
+    } else if (messageParse[0] == 'H2') {
+
+      var location1 = messageParse[1].split("$ $ $");
+      var location2 = messageParse[2].split("$ $ $");
+      var location3 = messageParse[3].split("$ $ $");
+
+      var infowindow1 = new google.maps.InfoWindow({
+        content: '<img src=' + location1[2] + '>' + location1[1]
+      });
+      var infowindow2 = new google.maps.InfoWindow({
+        content: '<img src=' + location2[2] + '>' + location2[1]
+      });
+      var infowindow3 = new google.maps.InfoWindow({
+        content: '<img src=' + location3[2] + '>' + location3[1]
+      });
+window.alert(location3[1]);
+      var location1LatLng = location1[0].split(",");
+      var location2LatLng = location2[0].split(",");
+      var location3LatLng = location3[0].split(",");
+
+      var marker1 = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(parseFloat(location1LatLng[0]), parseFloat(location1LatLng[1])),
+        title:"Top Result 1"
+      });
+      var marker2 = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(parseFloat(location2LatLng[0]), parseFloat(location2LatLng[1])),
+        title:"Top Result 2"
+      });
+      var marker3 = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(parseFloat(location3LatLng[0]), parseFloat(location3LatLng[1])),
+        title:"Top Result 3"
+      });
+
+      infowindow1.open(map,marker1);
+      infowindow2.open(map,marker2);
+      infowindow3.open(map,marker3);
+
+    } else {
+      websocket.close();
+    }
+
+  };
 
   function initialize() {
     var mapCanvas = document.getElementById('map-canvas');
@@ -190,8 +303,6 @@ input::-webkit-input-placeholder {
       center: new google.maps.LatLng(40.8069062, -73.9653714),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-//      zoomControl: false,
-//      scaleControl: false,
       scrollwheel: false,
     }
     map = new google.maps.Map(mapCanvas, mapOptions)
@@ -199,79 +310,70 @@ input::-webkit-input-placeholder {
   google.maps.event.addDomListener(window, 'load', initialize);
 
 
-  function basicSearch() {
-    var inputString = document.getElementById("userInput").value;
-    document.getElementById('userInput').value = '';
-    websocket = new WebSocket(wsUri);
-    websocket.onopen = function() {
-      websocket.send(inputString);
-    };
-    websocket.onmessage = function(evt) {
-      var message = evt.data;
-//      window.alert(message);
-
-//      document.body.style.backgroundImage = "url('img/bg2.jpg')";
-
-
-      var messageParse = evt.data.split("\t");
-      var latitude = parseFloat(messageParse[0]);
-      var longitude = parseFloat(messageParse[1]);
-      var latlng = new google.maps.LatLng(parseFloat(messageParse[0]), parseFloat(messageParse[1]));
-
-      var infowindow = new google.maps.InfoWindow({
-        content: '<img src=' + messageParse[2] + '>'
-      });
-      
-      var marker = new google.maps.Marker({
-//        position: new google.maps.LatLng(40.8069062, -73.9653714),
-        map: map,
-        position: latlng,
-        title:"Result point"
-      });
-
-      infowindow.open(map,marker);
-
-      map.setZoom(15);
-      map.setCenter(latlng);
-
-//      marker.setMap(map);
-//      google.maps.event.trigger(map, 'resize');
-
-//      window.alert(document.getElementById("userInput").style.width);
-      document.getElementById("userInput").style.width="400px";
-      document.getElementById("userInput").placeholder="Say something here and we will find you a place to go";
-      document.getElementById("wall").style.display="";
-//      window.alert(document.getElementById("wall").style.display);
-
-      websocket.close();
-
-    };
-    websocket.onerror = function(evt) {
-    };
-    websocket.onclose = function(evt) {
-    };
-
-
-
+  function citySearch() {
+    var inputCity = document.getElementById("cityInput").value;
+    document.getElementById('cityInput').value = '';
+    websocket.send('H1' + '^ ^ ^' + inputCity);
   }
+
+  function mainSearch() {
+    var inputSentence = document.getElementById("mainInput").value;
+    document.getElementById('mainInput').value = '';
+    websocket.send('H2' + '^ ^ ^' + inputSentence);
+  }
+
 </script>
 
 
   </head>
 
   <body>
-
+    <div class="wall-container" id="wall" style="display: none;">
+      <ul>
+        <li><p id="wallTag0">crazy</p><img id="wallImg0" src="img/pic2.jpg"></li>
+        <li><p id="wallTag1">big</p><img id="wallImg1" src="img/pic2.jpg"></li>
+        <li><p id="wallTag2">small</p><img id="wallImg2" src="img/pic2.jpg"></li>
+        <li><p id="wallTag3">fast</p><img id="wallImg3" src="img/pic2.jpg"></li>
+        <li><p id="wallTag4">slow</p><img id="wallImg4" src="img/pic2.jpg"></li>
+        <li><p id="wallTag5">awesome</p><img id="wallImg5" src="img/pic2.jpg"></li>
+        <li><p id="wallTag6">convenient</p><img id="wallImg6" src="img/pic2.jpg"></li>
+        <li><p id="wallTag7">necessary</p><img id="wallImg7" src="img/pic2.jpg"></li>
+        <li><p id="wallTag8">fun</p><img id="wallImg8" src="img/pic2.jpg"></li>
+        <li><p id="wallTag9">boring</p><img id="wallImg9" src="img/pic2.jpg"></li>
+        <li><p id="wallTag10">crazy</p><img id="wallImg10" src="img/pic2.jpg"></li>
+        <li><p id="wallTag11">boring</p><img id="wallImg11" src="img/pic2.jpg"></li>
+        <li><p id="wallTag12">small</p><img id="wallImg12" src="img/pic2.jpg"></li>
+        <li><p id="wallTag13">fast</p><img id="wallImg13" src="img/pic2.jpg"></li>
+        <li><p id="wallTag14">slow</p><img id="wallImg14" src="img/pic2.jpg"></li>
+        <li><p id="wallTag15">awesome</p><img id="wallImg15" src="img/pic2.jpg"></li>
+        <li><p id="wallTag16">convenient</p><img id="wallImg16" src="img/pic2.jpg"></li>
+        <li><p id="wallTag17">necessary</p><img id="wallImg17" src="img/pic2.jpg"></li>
+        <li><p id="wallTag18">fun</p><img id="wallImg18" src="img/pic2.jpg"></li>
+        <li><p id="wallTag19">boring</p><img id="wallImg19" src="img/pic2.jpg"></li>
+        <li><p id="wallTag20">crazy</p><img id="wallImg20" src="img/pic2.jpg"></li>
+        <li><p id="wallTag21">necessary</p><img id="wallImg21" src="img/pic2.jpg"></li>
+        <li><p id="wallTag22">fun</p><img id="wallImg22" src="img/pic2.jpg"></li>
+        <li><p id="wallTag23">boring</p><img id="wallImg23" src="img/pic2.jpg"></li>
+      </ul>
+    </div>
     <div class="splash-container">
       <h1 class="title">MyTravelAgent</h1>
       <h1 class="subtitle">Some words very zhuangbi here.</h1>
-      <div class="search" id="inputBox">
-        <form onsubmit="basicSearch(); return false;">
-          <input type="search" id="userInput" placeholder="Which city are you going?">
-<!--           <input type="search" id="userInput" placeholder="Say something here and we will find you a place to go"> -->
+      <div class="search" id="cityInputBox">
+        <form onsubmit="citySearch(); return false;">
+          <input type="search" id="cityInput" placeholder="Which city are you going?">
         </form>
       </div>
     </div>
     <div class="content-wrapper">
+      <div style="background: #2E8B57;">
+        <a href="">Home</a>
+        <div class="search" id="mainInputBox" style="visibility: hidden; display: inline-block;">
+          <form onsubmit="mainSearch(); return false;">
+            <input type="search" id="mainInput" placeholder="Say something here and we will find you a place to go">
+          </form>
+        </div>
+      </div>
       <div id="map-canvas"></div>
     </div>
   </body>
