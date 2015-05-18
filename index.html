@@ -5,7 +5,7 @@
     <title>Advanced Big Data Analytics Final Project</title>
     <style>
 
-body  {
+body {
   background-image: url("img/bg4.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -43,9 +43,9 @@ a.home:hover {
 }
 
 div.header {
-    background: green;
-    height: 45px;
-    opacity: 0.9;
+  background: green;
+  height: 45px;
+  opacity: 0.9;
 }
 
 img.header-background {
@@ -75,7 +75,7 @@ div.search {
   margin: 0px;
   position: absolute;
   left: -40px;
-  width: 1200px;
+  width: 2400px;
 }
  
 .wall-container li {
@@ -153,7 +153,7 @@ div.search {
 
 .content-wrapper {
   position: absolute;
-  top: 87%;
+  top: 600px;
   width: 100%;
   min-height: 12%;
   z-index: 3;
@@ -339,6 +339,11 @@ input.sentence::-webkit-input-placeholder {
 
           document.getElementById("wallTag" + i).innerHTML = wall[1];
           document.getElementById("wallImg" + i).src = wall[2];
+
+          var tmp = i + 24;
+
+          document.getElementById("wallTag" + tmp).innerHTML = wall[1];
+          document.getElementById("wallImg" + tmp).src = wall[2];
         }
         document.getElementById("wall").style.display="";
         document.getElementById('mainInputBox').style.visibility= "";
@@ -465,32 +470,63 @@ input.sentence::-webkit-input-placeholder {
   </head>
 
   <body>
-    <div class="wall-container" id="wall" style="display: none;">
+    <div class="wall-container" id="wall" style="display: ;">
       <ul>
-        <li><p onclick="reset(this.id)" id="wallTag0">crazy</p><img id="wallImg0" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag0">crazy</p><img id="wallImg0" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag1">big</p><img id="wallImg1" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag2">small</p><img id="wallImg2" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag3">fast</p><img id="wallImg3" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag4">slow</p><img id="wallImg4" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag5">awesome</p><img id="wallImg5" src="img/pic2.jpg"></li>
+
+        <li><p onclick="reset(this.id);" id="wallTag24">crazy</p><img id="wallImg24" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag25">big</p><img id="wallImg25" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag26">small</p><img id="wallImg26" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag27">fast</p><img id="wallImg27" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag28">slow</p><img id="wallImg28" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag29">awesome</p><img id="wallImg29" src="img/pic2.jpg"></li>
+
         <li><p onclick="reset(this.id);" id="wallTag6">convenient</p><img id="wallImg6" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag7">necessary</p><img id="wallImg7" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag8">fun</p><img id="wallImg8" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag9">boring</p><img id="wallImg9" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag10">crazy</p><img id="wallImg10" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag11">boring</p><img id="wallImg11" src="img/pic2.jpg"></li>
+
+        <li><p onclick="reset(this.id);" id="wallTag30">convenient</p><img id="wallImg30" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag31">necessary</p><img id="wallImg31" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag32">fun</p><img id="wallImg32" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag33">boring</p><img id="wallImg33" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag34">crazy</p><img id="wallImg34" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag35">boring</p><img id="wallImg35" src="img/pic2.jpg"></li>
+
         <li><p onclick="reset(this.id);" id="wallTag12">small</p><img id="wallImg12" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag13">fast</p><img id="wallImg13" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag14">slow</p><img id="wallImg14" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag15">awesome</p><img id="wallImg15" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag16">convenient</p><img id="wallImg16" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag17">necessary</p><img id="wallImg17" src="img/pic2.jpg"></li>
+
+        <li><p onclick="reset(this.id);" id="wallTag36">small</p><img id="wallImg36" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag37">fast</p><img id="wallImg37" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag38">slow</p><img id="wallImg38" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag39">awesome</p><img id="wallImg39" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag40">convenient</p><img id="wallImg40" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag41">necessary</p><img id="wallImg41" src="img/pic2.jpg"></li>
+
         <li><p onclick="reset(this.id);" id="wallTag18">fun</p><img id="wallImg18" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag19">boring</p><img id="wallImg19" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag20">crazy</p><img id="wallImg20" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag21">necessary</p><img id="wallImg21" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag22">fun</p><img id="wallImg22" src="img/pic2.jpg"></li>
         <li><p onclick="reset(this.id);" id="wallTag23">boring</p><img id="wallImg23" src="img/pic2.jpg"></li>
+
+        <li><p onclick="reset(this.id);" id="wallTag42">fun</p><img id="wallImg42" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag43">boring</p><img id="wallImg43" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag44">crazy</p><img id="wallImg44" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag45">necessary</p><img id="wallImg45" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag46">fun</p><img id="wallImg46" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag47">boring</p><img id="wallImg47" src="img/pic2.jpg"></li>
       </ul>
     </div>
     <div class="splash-container">
