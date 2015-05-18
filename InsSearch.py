@@ -28,7 +28,7 @@ def getToken():
         print(os.strerror(e.errno))  
         sys.exit(0)
 
-def searchCity(city):
+def searchCity(city, num):
     locationList = []
     locationIndex = {}
     tmp = Cities.findLocation(city)
@@ -85,6 +85,11 @@ def searchCity(city):
             locationList.append(locationDict)
             locationIndex[locationID] = index
         #print repr(dir(locationList[-1]['location'].point))
+    try: 
+        locationList = locationList[:num]
+    except:
+        "oops"
+        pass
     return locationList, locationIndex
      #print repr(dir(media))
 

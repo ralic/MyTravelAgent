@@ -76,7 +76,7 @@ class Client(WebSocket):
       self.city = city
       lat, lng = tmp
       ll = str(lat) + ',' + str(lng)
-      locationList, locationIndex = insta.searchCity(city)
+      locationList, locationIndex = insta.searchCity(city, 100)
       print "grams searched: " + str(len(locationList))
       locationList = locList24(locationList)
       print "sent pics num:" + str(len(locationList))
@@ -87,7 +87,7 @@ class Client(WebSocket):
       return
 
    def textRequest(self, text):
-      locationList, locationIndex = insta.searchCity(self.city)
+      locationList, locationIndex = insta.searchCity(self.city, 10)
       print "grams searched: " + str(len(locationList))
       # filter the locations with negative sentiment
       removeList = []
@@ -199,15 +199,19 @@ def getMaxLocation(locationList):
       if locationDict['simScore'] > maxScore:
          maxLocation = locationDict
          maxScore = locationDict['simScore']
+   if maxLocation is None:
+      maxLocation = locationList[0]
    return maxLocation
 
 
 
 def getTopLocation(locationList, topNum):
-   while len(locationList) < 3:
+   while len(locationList) < topNum:
       locationList += locationList
    top = []
    for i in range(0, topNum):
+      print 
+      print len(locationList)
       maxLocation = getMaxLocation(locationList)
       top.append(maxLocation)
       locationList.remove(maxLocation)
