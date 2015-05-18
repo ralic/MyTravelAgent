@@ -6,49 +6,68 @@
     <style>
 
 body  {
-    background-image: url("img/bg1.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
+  background-image: url("img/bg4.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
 }
 
 h1.title {
-    font-size: 80px;
-    max-height: 65px;
-    color: white;
-    text-align:center;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 80px;
+  max-height: 65px;
+  color: white;
+  text-align:center;
+  font-family: Century Gothic;
 }
 
 h1.subtitle {
-    font-size: 20px;
-    color: white;
-    text-align:center;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 30px;
+  color: white;
+  text-align:center;
+  font-family: Optima;
+  font-weight: lighter;
 }
 
 a.home {
-    color: white;
-    font-style: bold;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    text-decoration: none;
-    font-size: 20px;
-    margin-left: 20px;
+  color: white;
+  font-style: bold;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  text-decoration: none;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+a.home:hover {
+  cursor: pointer;
+}
+
+div.header {
+    background: green;
+    height: 45px;
+    opacity: 0.9;
+}
+
+img.header-background {
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+
+  -webkit-filter: blur(5px);
 }
 
 div.search {
-    text-align: center;
-
-
-/*    margin: 50px;*/
-/*    margin-top: 110px;*/
+  text-align: center;
 }
 
 .wall-container {
-    background: white;
-    z-index: 2;
-    position: fixed;
-    width: 1500px;
+  background: white;
+  z-index: 2;
+  position: fixed;
+  width: 1500px;
 }
 
 .wall-container ul {
@@ -116,25 +135,28 @@ div.search {
  
 .wall-container li:hover img {
   -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
 }
 
 .splash-container {
-    z-index: 1;
-    overflow: hidden;
-    width: 100%;
-    height: 88%;
-    top: 0;
-    left: 0;
-    position: fixed !important;
+  z-index: 1;
+  overflow: hidden;
+  width: 100%;
+  height: 88%;
+  top: 0;
+  left: 0;
+  position: fixed !important;
 }
 
 .content-wrapper {
-    position: absolute;
-    top: 87%;
-    width: 100%;
-    min-height: 12%;
-    z-index: 3;
-    background: white;
+  position: absolute;
+  top: 87%;
+  width: 100%;
+  min-height: 12%;
+  z-index: 3;
 }
 
 
@@ -143,9 +165,10 @@ input {
 }
 
 input.city {
+      text-align: center;
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font: bold 15px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size: 90%;
 }
 input::-webkit-search-decoration,
@@ -153,16 +176,18 @@ input::-webkit-search-cancel-button {
   display: none; 
 }
 
-
 input.city {
-  width: 190px;
-  border: solid 2px #ccc;
-  padding: 15px 10px 15px 35px;
-  opacity: 0.9;
+  width: 90px;
+  border: solid 2px green;
+  padding: 15px 10px 15px 10px;
+  background-color: green;
+  margin-top: 100px;
+
+  text-transform: uppercase;
   
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 13px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
   
   -webkit-transition: all .5s;
   -moz-transition: all .5s;
@@ -171,61 +196,98 @@ input.city {
 
 input.city:focus {
 
-  width: 400px;
+  width: 150px;
   background-color: #fff;
   border-color: #66CC75;
-  
+
   -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
   -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
   box-shadow: 0 0 5px rgba(109,207,246,.5);
 }
 
 input.sentence {
+
+  margin-top: 7px;
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  font-size: 90%;
+
+  background: url(img/icon.png) no-repeat center;
+  background-size: 50%;
+  background-color: white;
+
+  text-transform: uppercase;
+
+  border: 1px solid #d1d1d1;
+  font: bold 12px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: #bebebe;
+  width: 0px;
+  padding: 6px 15px 6px 15px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s ease 0s;
+
 }
 input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
   display: none; 
 }
 
-
-input.sentence {
-  width: 400px;
-  border: solid 2px #ccc;
-  padding: 15px 10px 15px 35px;
-  opacity: 0.9;
-  
-  -webkit-border-radius: 10em;
-  -moz-border-radius: 10em;
-  border-radius: 13px;
-  
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  transition: all .5s;
-}
-
 input.sentence:focus {
+  width: 93%;
+  background:white;
+  color: black;
+}
 
-  width: 400px;
+input.city:-moz-placeholder {
+  color: white;
+}
+input.city::-webkit-input-placeholder {
+  color: white;
+}
+
+input.sentence:-moz-placeholder {
+  color: #999;
+}
+input.sentence::-webkit-input-placeholder {
+  color: #999;
+}
+
+.gm-style-iw {
+  width: 200px !important;
+  height: 236px;
+  top: 15px !important;
+  left: 0px !important;
   background-color: #fff;
-  border-color: #66CC75;
-  
-  -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-  -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-  box-shadow: 0 0 5px rgba(109,207,246,.5);
+  box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+  border: 1px solid green;
+  border-radius: 10px 10px 10px 10px;
 }
 
-input:-moz-placeholder {
-  color: #999;
+#iw-container .iw-title {
+  width: 180px;
+  height: 16px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  margin: 0;
+  border-radius: 2px 2px 0 0;
 }
-input::-webkit-input-placeholder {
-  color: #999;
+.iw-content img {
+  max-width: 200px;
+  max-height: 200px;
 }
-
-
 
 #map-canvas {
   border: solid 2px #ccc;
@@ -236,9 +298,8 @@ input::-webkit-input-placeholder {
     </style>
 
 <script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-
-// window.alert("test");
 
   var map;
 
@@ -246,12 +307,8 @@ input::-webkit-input-placeholder {
   var tagList = [];
   var wallLat = [];
   var wallLng = [];
-  // for (var i = 0; i < 24; i++) {
-  //   imgUrl[i] = '';
-  //   tagList[i] = '';
-  // }
 
-  var wsUri = "ws://209.2.216.243:8000/";
+  var wsUri = "ws://192.168.1.145:8000/";
   websocket = new WebSocket(wsUri);
   websocket.onopen = function() {
   };
@@ -262,10 +319,7 @@ input::-webkit-input-placeholder {
   websocket.onmessage = function(evt) {
     var message = evt.data;
 
-//      document.body.style.backgroundImage = "url('img/bg2.jpg')";
-
     var messageParse = message.split("^ ^ ^");
-//    window.alert(messageParse.length);
 
     if (messageParse[0] == 'H1') {
       if (messageParse[1] == '-1') {
@@ -277,21 +331,15 @@ input::-webkit-input-placeholder {
         map.setZoom(15);
         map.setCenter(mapGoToLatLng);
 
-//window.alert(document.getElementById("wallTag3").value);
-
         for (var i = 0; i < 24; i++) {
           var wall = messageParse[i + 3].split("$ $ $");
 
           wallLat[i] = wall[0].split(",")[0];
           wallLng[i] = wall[0].split(",")[1];
-// window.alert("here");
+
           document.getElementById("wallTag" + i).innerHTML = wall[1];
           document.getElementById("wallImg" + i).src = wall[2];
         }
-// window.alert("here");
-// window.alert(document.getElementById("wall").style.display);
-// window.alert("here");
-// window.alert(document.getElementById("mainInputBox").style.display);
         document.getElementById("wall").style.display="";
         document.getElementById('mainInputBox').style.visibility= "";
       } else {
@@ -304,15 +352,24 @@ input::-webkit-input-placeholder {
       var location3 = messageParse[3].split("$ $ $");
 
       var infowindow1 = new google.maps.InfoWindow({
-        content: '<img src=' + location1[2] + '>' + location1[1]
+        content:  '<div id="iw-container">' +
+                    '<div class="iw-title">' + location1[1] + '</div>' +
+                      '<img src=' + location1[2] + ' height="200px" width="200px">' +
+                  '</div>'
       });
       var infowindow2 = new google.maps.InfoWindow({
-        content: '<img src=' + location2[2] + '>' + location2[1]
+        content:  '<div id="iw-container">' +
+                    '<div class="iw-title">' + location2[1] + '</div>' +
+                      '<img src=' + location2[2] + ' height="200px" width="200px">' +
+                  '</div>'
       });
       var infowindow3 = new google.maps.InfoWindow({
-        content: '<img src=' + location3[2] + '>' + location3[1]
+        content:  '<div id="iw-container">' +
+                    '<div class="iw-title">' + location3[1] + '</div>' +
+                      '<img src=' + location3[2] + ' height="200px" width="200px">' +
+                  '</div>'
       });
-window.alert(location3[1]);
+
       var location1LatLng = location1[0].split(",");
       var location2LatLng = location2[0].split(",");
       var location3LatLng = location3[0].split(",");
@@ -337,6 +394,10 @@ window.alert(location3[1]);
       infowindow2.open(map,marker2);
       infowindow3.open(map,marker3);
 
+      google.maps.event.addListener(infowindow1, 'domready', mapHacker);
+      google.maps.event.addListener(infowindow2, 'domready', mapHacker);
+      google.maps.event.addListener(infowindow3, 'domready', mapHacker);
+
     } else {
       websocket.close();
     }
@@ -356,6 +417,28 @@ window.alert(location3[1]);
   google.maps.event.addDomListener(window, 'load', initialize);
 
 
+  function mapHacker() {
+    var iwOuter = $('.gm-style-iw');
+    var iwBackground = iwOuter.prev();
+
+    iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+    iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+    iwOuter.parent().parent().css({left: '40px'});
+    iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+    iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+    iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'green 0px 0px 3px', 'z-index' : '1'});
+    
+    var iwCloseBtn = iwOuter.next();
+    
+    iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid green', 'border-radius': '13px', 'box-shadow': '0 0 3px green'});
+    if($('.iw-content').height() < 140){
+      $('.iw-bottom-gradient').css({display: 'none'});
+    }
+    iwCloseBtn.mouseout(function(){
+      $(this).css({opacity: '1'});
+    });
+  }
+
   function citySearch() {
     var inputCity = document.getElementById("cityInput").value;
     document.getElementById('cityInput').value = '';
@@ -368,63 +451,65 @@ window.alert(location3[1]);
     websocket.send('H2' + '^ ^ ^' + inputSentence);
   }
 
-  function reset() {
-    websocket.close();
-    document.getElementById("wall").style.display="none";
-    websocket = new WebSocket(wsUri);
+  function reset(idName) {
+    var index = parseFloat(idName.replace("wallTag", ""));
+
+    var marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(wallLat[index], wallLng[index])
+    });
   }
 
 </script>
-
 
   </head>
 
   <body>
     <div class="wall-container" id="wall" style="display: none;">
       <ul>
-        <li><p id="wallTag0">crazy</p><img id="wallImg0" src="img/pic2.jpg"></li>
-        <li><p id="wallTag1">big</p><img id="wallImg1" src="img/pic2.jpg"></li>
-        <li><p id="wallTag2">small</p><img id="wallImg2" src="img/pic2.jpg"></li>
-        <li><p id="wallTag3">fast</p><img id="wallImg3" src="img/pic2.jpg"></li>
-        <li><p id="wallTag4">slow</p><img id="wallImg4" src="img/pic2.jpg"></li>
-        <li><p id="wallTag5">awesome</p><img id="wallImg5" src="img/pic2.jpg"></li>
-        <li><p id="wallTag6">convenient</p><img id="wallImg6" src="img/pic2.jpg"></li>
-        <li><p id="wallTag7">necessary</p><img id="wallImg7" src="img/pic2.jpg"></li>
-        <li><p id="wallTag8">fun</p><img id="wallImg8" src="img/pic2.jpg"></li>
-        <li><p id="wallTag9">boring</p><img id="wallImg9" src="img/pic2.jpg"></li>
-        <li><p id="wallTag10">crazy</p><img id="wallImg10" src="img/pic2.jpg"></li>
-        <li><p id="wallTag11">boring</p><img id="wallImg11" src="img/pic2.jpg"></li>
-        <li><p id="wallTag12">small</p><img id="wallImg12" src="img/pic2.jpg"></li>
-        <li><p id="wallTag13">fast</p><img id="wallImg13" src="img/pic2.jpg"></li>
-        <li><p id="wallTag14">slow</p><img id="wallImg14" src="img/pic2.jpg"></li>
-        <li><p id="wallTag15">awesome</p><img id="wallImg15" src="img/pic2.jpg"></li>
-        <li><p id="wallTag16">convenient</p><img id="wallImg16" src="img/pic2.jpg"></li>
-        <li><p id="wallTag17">necessary</p><img id="wallImg17" src="img/pic2.jpg"></li>
-        <li><p id="wallTag18">fun</p><img id="wallImg18" src="img/pic2.jpg"></li>
-        <li><p id="wallTag19">boring</p><img id="wallImg19" src="img/pic2.jpg"></li>
-        <li><p id="wallTag20">crazy</p><img id="wallImg20" src="img/pic2.jpg"></li>
-        <li><p id="wallTag21">necessary</p><img id="wallImg21" src="img/pic2.jpg"></li>
-        <li><p id="wallTag22">fun</p><img id="wallImg22" src="img/pic2.jpg"></li>
-        <li><p id="wallTag23">boring</p><img id="wallImg23" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id)" id="wallTag0">crazy</p><img id="wallImg0" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag1">big</p><img id="wallImg1" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag2">small</p><img id="wallImg2" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag3">fast</p><img id="wallImg3" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag4">slow</p><img id="wallImg4" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag5">awesome</p><img id="wallImg5" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag6">convenient</p><img id="wallImg6" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag7">necessary</p><img id="wallImg7" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag8">fun</p><img id="wallImg8" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag9">boring</p><img id="wallImg9" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag10">crazy</p><img id="wallImg10" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag11">boring</p><img id="wallImg11" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag12">small</p><img id="wallImg12" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag13">fast</p><img id="wallImg13" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag14">slow</p><img id="wallImg14" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag15">awesome</p><img id="wallImg15" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag16">convenient</p><img id="wallImg16" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag17">necessary</p><img id="wallImg17" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag18">fun</p><img id="wallImg18" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag19">boring</p><img id="wallImg19" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag20">crazy</p><img id="wallImg20" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag21">necessary</p><img id="wallImg21" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag22">fun</p><img id="wallImg22" src="img/pic2.jpg"></li>
+        <li><p onclick="reset(this.id);" id="wallTag23">boring</p><img id="wallImg23" src="img/pic2.jpg"></li>
       </ul>
     </div>
     <div class="splash-container">
-      <h1 class="title">MyTravelAgent</h1>
-      <h1 class="subtitle">Some words very zhuangbi here.</h1>
+      <h1 class="title">MyTravelAgent<span style="color: green; font-weight: bold">.</span></h1>
+      <h1 class="subtitle">go where you feel like going</h1>
       <div class="search" id="cityInputBox">
         <form onsubmit="citySearch(); return false;">
-          <input class="city" id="cityInput" placeholder="Which city are you going?">
+          <input class="city" id="cityInput" placeholder="ENTER CITY" onfocus="this.placeholder = ''">
         </form>
       </div>
     </div>
     <div class="content-wrapper">
-      <div style="background: #2E8B57;">
-        <a onclick="reset()" class="home">Home</a>
-        <div class="search" id="mainInputBox" style="margin-left: 300px; visibility: ; display: inline-block;">
+      <div class="header" id="header">
+        <div class="search" id="mainInputBox" style="visibility: ;">
           <form onsubmit="mainSearch(); return false;">
-            <input class="sentence" id="mainInput" placeholder="Say something here and we will find you a place to go">
+            <input class="sentence" id="mainInput" placeholder="ENTER WHATEVER IS ON YOUR MIND">
           </form>
         </div>
+
       </div>
       <div id="map-canvas"></div>
     </div>
