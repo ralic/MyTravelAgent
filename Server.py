@@ -87,7 +87,11 @@ class Client(WebSocket):
       return
 
    def textRequest(self, text):
-      locationList, locationIndex = insta.searchCity(self.city, 10)
+      try:
+         city = self.city
+      except:
+         city = "new york"
+      locationList, locationIndex = insta.searchCity(city, 10)
       print "grams searched: " + str(len(locationList))
       # filter the locations with negative sentiment
       removeList = []
