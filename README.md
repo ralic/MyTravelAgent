@@ -8,10 +8,10 @@ Course Project for Big Data Analytics
 
 python packages to download for running this project:
 
-nltk
-numpy
-pyfoursquare
-python instagram
+nltk,
+numpy,
+pyfoursquare,
+python-instagram
 
 
 
