@@ -2,16 +2,15 @@ import pyfoursquare as foursquare
 
 def init():
 	global FS
-	clientID = "BBCFS0BLYGRTNEGWZFZYXBJ05MEEJ0UVA21P1CUIBQK3HNYK"
-	clientSecret = "NZE55Y3UBQ0GOY5SGXARJL5HXI1BTO3V4VWCVP2ZZYDIKM2S"
+	clientID = ""
+	clientSecret = ""
 	callback = ''
 
 	auth = foursquare.OAuthHandler(clientID, clientSecret, callback)
 
-	accessToken = "LOOD23HDGFTTDXRCPA5JBVEUQITWFPPC25EZSCCDTU2NORQ1"
+	accessToken = ""
 	auth.set_access_token(accessToken)
 
-	#Now let's create an API
 	FS = foursquare.API(auth)
 
 def searchLL(lat, lgn):
