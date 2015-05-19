@@ -2,6 +2,7 @@
 
 Course Project for Big Data Analytics
 
+A short demo: https://www.youtube.com/watch?v=u6xmy6BlbkU
 -----------------------------------------------------------------------
 
 
