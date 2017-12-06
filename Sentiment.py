@@ -73,7 +73,7 @@ def evaluateFeatures(featureSelect):
     #trainFeatures = posFeatures[:posCutoff] + negFeatures[:negCutoff]
     testFeatures = posFeatures[posCutoff:] + negFeatures[negCutoff:]
     trainFeatures = posFeatures + negFeatures
-    print testFeatures[0]
+    print(testFeatures[0])
     classifier = NaiveBayesClassifier.train(trainFeatures)  
 
     referenceSets = collections.defaultdict(set)
@@ -129,7 +129,7 @@ def getWordScores():
     total_word_count = pos_word_count + neg_word_count
 
     word_scores = {}
-    for word, freq in word_fd.iteritems():
+    for word, freq in word_fd.items():
         pos_score = BigramAssocMeasures.chi_sq(cond_word_fd['pos'][word], (freq, pos_word_count), total_word_count)
         neg_score = BigramAssocMeasures.chi_sq(cond_word_fd['neg'][word], (freq, neg_word_count), total_word_count)
         word_scores[word] = pos_score + neg_score
@@ -138,7 +138,7 @@ def getWordScores():
 
 
 def getBestWords(word_scores, number):
-    best_vals = sorted(word_scores.iteritems(), key=lambda (w, s): s, reverse=True)[:number]
+    best_vals = sorted(iter(word_scores.items()), key=lambda w_s: w_s[1], reverse=True)[:number]
     best_words = set([w for w, s in best_vals])
     return best_words
 
@@ -151,7 +151,7 @@ initPath()
 
 if __name__ == "__main__":
 
-    print "pos" == getSentiment(makeFullDict, "What a wonderful place to eat!")
+    print("pos" == getSentiment(makeFullDict, "What a wonderful place to eat!"))
 
     #finds word scores
     #word_scores = getWordScores()

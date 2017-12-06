@@ -44,7 +44,7 @@ def findLocation(city):
 init()
 
 if __name__ == "__main__":
-	print findLocation("Boston")
+	print(findLocation("Boston"))
 
 
 

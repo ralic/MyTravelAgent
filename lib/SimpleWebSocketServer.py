@@ -2,7 +2,7 @@
 The MIT License (MIT)
 Copyright (c) 2013 Dave P.
 '''
-import SocketServer
+import socketserver
 import hashlib
 import base64
 import socket
@@ -12,9 +12,9 @@ import time
 import sys
 import errno
 import codecs
-import Queue
-from BaseHTTPServer import BaseHTTPRequestHandler
-from StringIO import StringIO
+import queue
+from http.server import BaseHTTPRequestHandler
+from io import StringIO
 from select import select
 
 __all__ = ['WebSocket', 'SimpleWebSocketServer', 'SimpleSSLWebSocketServer']
@@ -81,7 +81,7 @@ class WebSocket(object):
       self.frag_buffer = None
       self.frag_decoder = codecs.getincrementaldecoder('utf-8')(errors='strict')
       self.closed = False
-      self.sendq = Queue.Queue()
+      self.sendq = queue.Queue()
       
       self.state = HEADERB1
    
@@ -130,7 +130,7 @@ class WebSocket(object):
         
       if self.opcode == CLOSE:
          status = 1000
-         reason = u''
+         reason = ''
          length = len(self.data)
         
          if length == 0:
@@ -163,7 +163,7 @@ class WebSocket(object):
                 self.frag_decoder.reset()
                 
                 if self.frag_type == TEXT:
-                    self.frag_buffer = u''
+                    self.frag_buffer = ''
                     utf_str = self.frag_decoder.decode(self.data, final = False)
                     if utf_str:
                         self.frag_buffer += utf_str
@@ -242,7 +242,7 @@ class WebSocket(object):
                self.request = HTTPRequest(self.headerbuffer)
                      
                # handshake rfc 6455
-               if self.request.headers.has_key('Sec-WebSocket-Key'.lower()):
+               if 'Sec-WebSocket-Key'.lower() in self.request.headers:
                   key = self.request.headers['Sec-WebSocket-Key'.lower()]
                   hStr = HANDSHAKE_STR % { 'acceptstr' :  base64.b64encode(hashlib.sha1(key + GUID_STR).digest()) }
                   self._sendBuffer(hStr)
@@ -263,7 +263,7 @@ class WebSocket(object):
             self._parseMessage(ord(d))
 
 
-   def close(self, status = 1000, reason = u''):
+   def close(self, status = 1000, reason = ''):
        """
           Send Close frame to the client. The underlying socket is only closed 
           when the client acknowledges the Close frame. 
@@ -275,7 +275,7 @@ class WebSocket(object):
           if self.closed is False:
             close_msg = bytearray()
             close_msg.extend(struct.pack("!H", status))
-            if isinstance(reason, unicode):
+            if isinstance(reason, str):
                 close_msg.extend(reason.encode('utf-8'))
             else:
                 close_msg.extend(reason)
@@ -318,7 +318,7 @@ class WebSocket(object):
           If the data is a bytearray object then the frame is sent as Binary. 
       """
       opcode = BINARY
-      if isinstance(data, unicode):
+      if isinstance(data, str):
          opcode = TEXT
       self._sendMessage(True, opcode, data)
         
@@ -348,7 +348,7 @@ class WebSocket(object):
           If the data is a bytearray object then the frame is sent as Binary. 
       """
       opcode = BINARY
-      if isinstance(data, unicode):
+      if isinstance(data, str):
          opcode = TEXT
       self._sendMessage(False, opcode, data)
    
@@ -361,7 +361,7 @@ class WebSocket(object):
            b1 |= 0x80
         b1 |= opcode
         
-        if isinstance(data, unicode):
+        if isinstance(data, str):
            data = data.encode('utf-8')
            
         length = len(data)
@@ -571,7 +571,7 @@ class SimpleWebSocketServer(object):
    def close(self):
       self.serversocket.close()
       
-      for conn in self.connections.itervalues():
+      for conn in self.connections.values():
          conn.close()
          try:
             conn.handleClose()

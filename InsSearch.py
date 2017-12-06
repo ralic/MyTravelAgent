@@ -25,7 +25,7 @@ def getToken():
             for line in f:
                 return line.strip()
     except IOError as e:
-        print(os.strerror(e.errno))  
+        print((os.strerror(e.errno)))  
         sys.exit(0)
 
 def searchCity(city, num):
@@ -36,7 +36,7 @@ def searchCity(city, num):
         return -1
     lat, lng = tmp
     mediaList = ins.media_search(count=100, lat=lat, lng=lng, q=2000)#, min_timestamp=1431216000, max_timestamp=1431737117)
-    print "Media Searched: " + str(len(mediaList))
+    print("Media Searched: " + str(len(mediaList)))
     for media in mediaList:
         #print repr(dir(media))
         #print media.get_thumbnail_url()

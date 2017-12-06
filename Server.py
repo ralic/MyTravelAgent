@@ -23,11 +23,11 @@ class Client(WebSocket):
       recv = self.data.split(STAR)
       header = recv[0].strip()
       if header == "H1":
-         print "city requested"
+         print("city requested")
          city = recv[1].strip()
          self.cityRequest(city)
       elif header == "H2":
-         print "text requested"
+         print("text requested")
          text = recv[1].strip()
          # self.sendStr(SEND_STR)
          # print "sent"
@@ -35,11 +35,11 @@ class Client(WebSocket):
             #pass
             self.textRequest(text)
          except:
-            print "Unexpected error:", sys.exc_info()[0]
-            print (traceback.format_exc())
+            print("Unexpected error:", sys.exc_info()[0])
+            print((traceback.format_exc()))
             raise
       else:
-         print "invalid request"
+         print("invalid request")
       # city = self.data
       # locationList, locationIndex = insta.searchCity(city)
       # point = locationList[-1]['location'].point
@@ -53,11 +53,11 @@ class Client(WebSocket):
       # self.sendStr(toSend)
 
    def handleConnected(self):
-      print "A socket is connected."
+      print("A socket is connected.")
       pass
 
    def handleClose(self):
-      print "A socket is closed."
+      print("A socket is closed.")
       pass        
 
 
@@ -71,19 +71,19 @@ class Client(WebSocket):
       if tmp == -1:
          toSend = STAR.join(['H1', '-1'])
          self.sendStr(toSend)
-         print "city not found"
+         print("city not found")
          return -1
       self.city = city
       lat, lng = tmp
       ll = str(lat) + ',' + str(lng)
       locationList, locationIndex = insta.searchCity(city, 100)
-      print "grams searched: " + str(len(locationList))
+      print("grams searched: " + str(len(locationList)))
       locationList = locList24(locationList)
-      print "sent pics num:" + str(len(locationList))
+      print("sent pics num:" + str(len(locationList)))
       toSend = STAR.join(['H1', '0', ll, locList2str(locationList)])
-      print toSend
+      print(toSend)
       self.sendStr(toSend)
-      print "sent"
+      print("sent")
       return
 
    def textRequest(self, text):
@@ -92,19 +92,19 @@ class Client(WebSocket):
       except:
          city = "new york"
       locationList, locationIndex = insta.searchCity(city, 10)
-      print "grams searched: " + str(len(locationList))
+      print("grams searched: " + str(len(locationList)))
       # filter the locations with negative sentiment
       removeList = []
       for locationDict in locationList:
          captions = locationDict['captions']
          if not Sentiment.judgeSetSentiment(captions):
             removeList.append(locationDict)
-      print "finished sentiment judging"
+      print("finished sentiment judging")
       for locationDict in removeList:
          locationList.remove(locationDict)
       # get the locations with top three similarities
       text = "".join(l for l in text if l not in string.punctuation)
-      print text
+      print(text)
       textList = text.split()
       for locationDict in locationList:
          tags = locationDict['tags']
@@ -112,7 +112,7 @@ class Client(WebSocket):
             tags[i] = tags[i].name.strip("#")
          simScore = wa.getSetsSim(tags, textList)
          locationDict['simScore'] = simScore
-      print "finished similarities"
+      print("finished similarities")
       topThree = getTopLocation(locationList, 3)
       stringList = []
       for locationDict in topThree:
@@ -128,9 +128,9 @@ class Client(WebSocket):
             imageUrl = searchUrl
          stringList.append(TRI.join([ll, txt, imageUrl]))      
       toSend = STAR.join(['H2'] + stringList)
-      print toSend
+      print(toSend)
       self.sendStr(toSend)
-      print "sent"
+      print("sent")
 
 
 
@@ -142,7 +142,7 @@ def initServer():
    return server
    
 def close_sig_handler(signal, frame):
-   print ("\n\n[*] " + "Closing server...\n\n")
+   print(("\n\n[*] " + "Closing server...\n\n"))
    server.close()
    sys.exit()
 
@@ -155,7 +155,7 @@ def locList2str(locationList):
       tags = locationDict['tags']
       tag = "x" * 9
       if len(tags) == 0:
-         print "picking pool cos no tag"
+         print("picking pool cos no tag")
          tag = pickTagPool()
       else:
          for t in tags:
@@ -168,7 +168,7 @@ def locList2str(locationList):
                tag = t
                break
          if (len(tag) > 7):
-            print "picking pool cos too long"
+            print("picking pool cos too long")
             t = pickTagPool()
             tag = t
       tag = tag.strip("#").upper()
@@ -214,8 +214,8 @@ def getTopLocation(locationList, topNum):
       locationList += locationList
    top = []
    for i in range(0, topNum):
-      print 
-      print len(locationList)
+      print() 
+      print(len(locationList))
       maxLocation = getMaxLocation(locationList)
       top.append(maxLocation)
       locationList.remove(maxLocation)

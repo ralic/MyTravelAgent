@@ -18,11 +18,11 @@ def searchLL(lat, lgn):
 	result = FS.venues_search(ll=ll)
 	# print FS.venues(id = test.id).photos.items()[1][1][0][u'prefix']
 	try:
-		CountItems = FS.venues(id = result[0].id).photos.items()[1][1][0]
+		CountItems = list(FS.venues(id = result[0].id).photos.items())[1][1][0]
 		#print CountItems['count']
 		item = CountItems['items'][0]
 		url = item['prefix'] + "720x720" + item['suffix']
-		print url
+		print(url)
 	except:
 		url = ""
 	return result[0], url
@@ -31,7 +31,7 @@ def searchLL(lat, lgn):
 init()
 
 if __name__ == "__main__":
-	print searchLL(-8.063542, -34.872891)
+	print(searchLL(-8.063542, -34.872891))
 	# test = result
 	# # print FS.venues(id = test.id).photos.items()[1][1][0][u'prefix']
 	# CountItems = FS.venues(id = test.id).photos.items()[1][1][0]

@@ -79,9 +79,9 @@ def getSetsSim(refSet, targetSet):
 
 
 if  __name__ == "__main__":
-    print semSim("happy", "excited")
-    print semSim("policman", "fireman")
-    print semSim("tree", "flower")
+    print(semSim("happy", "excited"))
+    print(semSim("policman", "fireman"))
+    print(semSim("tree", "flower"))
     #synsets2 = wn.synsets("ice")
     #print getShortestPath(synsets1, synsets2)
     #print synsets1[0].hypernym_paths()[3]
